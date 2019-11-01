@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import re
 
 
 class UrlRewriteTracer:
@@ -11,40 +12,41 @@ class UrlRewriteTracer:
                                                 </rule>
                             </rules>              
                         </rewrite>""".replace("\n", "")
-                    
-    
-    def parseXML(self):
-        # create element tree object 
-        root = ET.fromstring(self.xmlData) 
-  
-        # get root element 
-        print(root.tag)
-  
-        # create empty list for news items 
-        #rules = [] 
-        
-    
-        # iterate news items 
-        for rule in root.findall('.rules'): 
-        
-            #
-            # empty news dictionary 
-            #rules = {} 
-            print(rule)
-            # iterate child elements of item 
-            #for child in item: 
-            
-                # special checking for namespace object content:media 
-            #    if child.tag == '{http://search.yahoo.com/mrss/}content': 
-            #        news['media'] = child.attrib['url'] 
-            #    else: 
-            #        news[child.tag] = child.text.encode('utf8') 
-    
-            # append news dictionary to news items list 
-            #newsitems.append(news) 
 
-        # return news items list 
-        #return newsitems 
+    def parseXML(self):
+        # create element tree object
+        root = ET.fromstring(self.xmlData)
+        # get root element
+        #print(root.tag)
+
+        # create empty list for news items
+        #rules = []
+
+        # iterate news items
+        for rule in root.findall('./rules/rule'):
+            print(rule.attrib["name"])
+            matchingUrl = rule.find('./match')
+            print(matchingUrl.attrib['url'])
+
+            #
+            # empty news dictionary
+            #rules = {}
+
+            # iterate child elements of item
+            #for child in item:
+
+            # special checking for namespace object content:media
+            #    if child.tag == '{http://search.yahoo.com/mrss/}content':
+            #        news['media'] = child.attrib['url']
+            #    else:
+            #        news[child.tag] = child.text.encode('utf8')
+
+            # append news dictionary to news items list
+            #newsitems.append(news)
+
+        # return news items list
+        #return newsitems
+
 
 # <rule name="Cancer Support Group Programs to Support" stopProcessing="true">
 #                                     <match url="Services/Cancer-Care/Support-Groups-Programs.aspx" />

@@ -1,4 +1,4 @@
-from tracer import UrlRewriteTester
+from tracer import UrlRewriteTracer
 
-tester = UrlRewriteTester()
+tester = UrlRewriteTracer()
 tester.parseXML()
